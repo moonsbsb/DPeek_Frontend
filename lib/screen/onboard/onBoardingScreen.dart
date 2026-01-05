@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mypal/screen/onboard/Start3Page.dart';
+import 'package:mypal/screen/onboard/Start4Page.dart';
 import 'Start1Page.dart';
 import 'Start2Page.dart';
 
@@ -31,7 +33,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         controller: _controller,
         children: [
           Start1Page(onNext: _goNext),
-          const Start2Page(),
+          Start2Page(onNext: _goNext),
+          Start3page(onNext: _goNext),
+          Start4page(onNext: _goNext)
         ],
       ),
     );

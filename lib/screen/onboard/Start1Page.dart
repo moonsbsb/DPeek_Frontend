@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mypal/theme/appcolor.dart';
+import 'package:mypal/strings/OnboardingStrings.dart';
 
 class Start1Page extends StatelessWidget {
 
@@ -35,7 +36,7 @@ class Start1Page extends StatelessWidget {
                 child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Text(
-                    'D-Peek',
+                    Onbordingstrings.title,
                     style: Theme.of(context).textTheme.headlineLarge,
                     textAlign: TextAlign.center,
                   ),
@@ -51,7 +52,7 @@ class Start1Page extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                   onPressed: onNext,
-                  child: const Text('시작하기'),
+                  child: const Text(Onbordingstrings.nextBtn)
                 ),
               ),
 
