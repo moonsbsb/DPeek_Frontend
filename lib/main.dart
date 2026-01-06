@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mypal/theme/app_theme.dart';
 import 'package:mypal/screen/onboard/onBoardingScreen.dart';
+import 'package:mypal/screen/MainScreen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: appTheme,
-      home: const OnboardingScreen(),
+      home: const MainScreen(),
     );
   }
 }
