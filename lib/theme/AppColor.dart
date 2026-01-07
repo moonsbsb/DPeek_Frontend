@@ -8,4 +8,8 @@ class Appcolor {
 
   static const Color inactiveNav = Color(0xffE2E1DA);
   static const Color activeNav = Color(0xffB6B3AC);
+
+  static const Color gradientStart = Color(0xffD9D6C3);
+  
+  static const Color table = Color(0xffEBE8E1);
 }
