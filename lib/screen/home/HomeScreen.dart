@@ -5,6 +5,7 @@ import 'package:mypal/model/MachineState.dart';
 import 'package:mypal/theme/AppColor.dart';
 import 'package:mypal/theme/AppGradient.dart';
 import 'package:mypal/theme/AppTextStyle.dart';
+import 'MachineWithLever.dart';
 
 class HomeScreen extends StatefulWidget{
   const HomeScreen({super.key});
@@ -12,12 +13,36 @@ class HomeScreen extends StatefulWidget{
   @override
   State<HomeScreen> createState() => _HomeScreen();
 
+  
+
 }
 
 class _HomeScreen extends State<HomeScreen>{
 
   Machinestate machineState = Machinestate.empty; // 머신 이미지 상태
-  int ticket = 0; // 티켓 수
+  int ticket = 3; // 티켓 수
+
+  void _onLeverTop(){
+    if(ticket <= 0) return;
+    if(Machinestate == Machinestate.empty) return;
+
+    setState(() {
+      ticket --;
+      _updateMachineState();
+    });
+  }
+
+  void _updateMachineState(){
+    if (ticket <= 0) {
+      machineState = Machinestate.empty;
+    } else if (ticket == 1) {
+      machineState = Machinestate.quater;
+    } else if (ticket == 2) {
+      machineState = Machinestate.half;
+    } else {
+      machineState = Machinestate.full;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +92,16 @@ class _HomeScreen extends State<HomeScreen>{
 
               Align(
                 alignment: const FractionalOffset(0.5, 0.55),
-                child: SvgPicture.asset(
-                machineState.imagePath,
-                fit: BoxFit.contain,
-                ),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.75,
+                  child: AspectRatio(
+                    aspectRatio: 3/4,
+                    child: Machinewithlever(
+                      machineState: machineState,
+                      onLeverTop: _onLeverTop,
+                    ),
+                  ),
+                )
               ),
             ],
           )
@@ -79,3 +110,4 @@ class _HomeScreen extends State<HomeScreen>{
     );
   }
 }
+
