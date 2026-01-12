@@ -4,7 +4,12 @@ class AppTextStyle{
 
   static const TextStyle title = TextStyle(
     fontSize: 50,
-    fontWeight: FontWeight.w400
+    fontWeight: FontWeight.w500
+  );
+
+  static const TextStyle display = TextStyle(
+    fontSize: 50,
+    fontWeight: FontWeight.w600
   );
 
   static const TextStyle largeRegular = TextStyle(

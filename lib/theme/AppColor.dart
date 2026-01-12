@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Appcolor {
-  static const Color background = Color(0xFFF2F1EB);
-  static const Color BtnPrimary = Color(0xffB6B3AC);
+  static const Color background = Color(0xFFFFEB83);
+  static const Color primary = Color(0xFFFFEB83);
+  static const Color BtnPrimary = Color(0xffFFFCEC);
+  static const Color subPrimary = Color(0xffFFFCEC);
   static const Color white = Color(0xffFFFFFF);
   static const Color back = Color(0xff000000);
 
@@ -12,4 +14,8 @@ class Appcolor {
   static const Color gradientStart = Color(0xffD9D6C3);
   
   static const Color table = Color(0xffEBE8E1);
+
+  static const Color darkGrey = Color(0xff2E2E2E);
+  static const Color middleGrey = Color(0xff707171);
+  static const Color lightGrey = Color(0xffF9F9F9);
 }
