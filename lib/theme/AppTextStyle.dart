@@ -12,6 +12,11 @@ class AppTextStyle{
     fontWeight: FontWeight.w600
   );
 
+  static const TextStyle largeLarge = TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w700
+  );
+  
   static const TextStyle largeRegular = TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.w400

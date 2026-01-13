@@ -8,6 +8,7 @@ final ThemeData appTheme = ThemeData(
   textTheme: const TextTheme(
     headlineLarge: AppTextStyle.title,          // 큰 타이틀
     titleLarge: AppTextStyle.display,
+    titleSmall: AppTextStyle.largeLarge,
     titleMedium: AppTextStyle.largeRegular,     // 서브 타이틀
     bodyLarge: AppTextStyle.bodyBold,            // 본문 강조
     bodyMedium: AppTextStyle.bodyRegular,        // 본문

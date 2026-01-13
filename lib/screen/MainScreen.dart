@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mypal/screen/calendar/CalendarScreen.dart';
 import 'package:mypal/screen/report/ReportScreen.dart';
 import 'package:mypal/screen/setting/SettingScreen.dart';
-import 'package:mypal/screen/write/WriteScreen.dart';
+import 'package:mypal/screen/management/ManagementScreen.dart';
 import 'package:mypal/theme/AppColor.dart';
 import 'home/HomeScreen.dart';
 
@@ -18,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = const [
     HomeScreen(),
     CalendarScreen(),
-    WriteScreen(),
+    ManagementScreen(),
     ReportScreen(),
     SettingScreen()
   ];
@@ -53,7 +53,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
-            label: '작성'
+            label: '관리'
           ),
            BottomNavigationBarItem(
             icon: Icon(Icons.book),
