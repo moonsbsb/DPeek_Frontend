@@ -82,7 +82,7 @@ class _SpendAnalysisCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _CardContainer(
+    return CardContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -170,7 +170,7 @@ class _ExpectedPaymentCard extends StatelessWidget {
       ('왓챠', '9일 후 결제', '13000₩'),
     ];
 
-    return _CardContainer(
+    return CardContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -207,9 +207,9 @@ class _ExpectedPaymentCard extends StatelessWidget {
   }
 }
 
-class _CardContainer extends StatelessWidget {
+class CardContainer extends StatelessWidget {
   final Widget child;
-  const _CardContainer({required this.child});
+  const CardContainer({required this.child});
 
   @override
   Widget build(BuildContext context) {

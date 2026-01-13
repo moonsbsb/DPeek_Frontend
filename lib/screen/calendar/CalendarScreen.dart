@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mypal/screen/home/HomeScreen.dart';
 import 'package:mypal/theme/appcolor.dart';
 
 class CalendarScreen extends StatefulWidget{
@@ -78,22 +79,37 @@ class _CalenderScreen extends State<CalendarScreen>{
   }
 
 
-  @override
+  @override 
   Widget build(BuildContext context) {
+
     return Scaffold(
-      backgroundColor: Appcolor.background,
+      backgroundColor: Appcolor.lightGrey,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _DatePicker(
+              SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('${selectedMonth.month}월 결제 일정', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Appcolor.middleGrey)),
+                    Text('${selectedMonth.year}년', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Appcolor.middleGrey),)
+                  ],
+                ),
+              ),
+              
+              /** 
+                _DatePicker(
                 month: selectedMonth,
                 onPrevMonth: _goPrevMonth,
                 onNextMonth: _goNextMonth,
                 onYearTap: _pickYear,
               ),
+              **/
               const SizedBox(height: 16),
 
               _Calendar(
@@ -101,11 +117,19 @@ class _CalenderScreen extends State<CalendarScreen>{
                 selectedDate: selectedDate,
                 onDateSelected: _onDateSelected
               ),
+              
+              const SizedBox(height: 25),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: _RecordByDate(selectedDate: selectedDate,),
+              ),
+
               const SizedBox(height: 16),
 
-              _RecordByDate(selectedDate: selectedDate,),
-              const SizedBox(height: 16),
+              _RecordList(),
 
+              const SizedBox(height: 16),
             ],
           ),
           )
@@ -176,37 +200,45 @@ class _Calendar extends StatelessWidget{
     final int leadingEmptyDays = firstWeekday - 1;
     final int totalItems = leadingEmptyDays + daysInMonth;
 
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: totalItems,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 7,
-        mainAxisSpacing: 12,
-        crossAxisSpacing: 12,
-      ), 
-      itemBuilder: (context, index){
-        if(index < leadingEmptyDays){
-          return const SizedBox();
-        }
+    return CardContainer(
+      child: Column(
+        children: [
+          SizedBox(height: 10),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: totalItems,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 7,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+            ), 
+            itemBuilder: (context, index){
+              if(index < leadingEmptyDays){
+                return const SizedBox();
+              }
 
-        final day = index - leadingEmptyDays + 1;
-        final date = DateTime(year, m, day);
+            final day = index - leadingEmptyDays + 1;
+            final date = DateTime(year, m, day);
 
-        final bool isSelected = 
-          selectedDate != null &&
-          selectedDate!.year == year &&
-          selectedDate!.month == m &&
-          selectedDate!.day == day;
+            final bool isSelected = 
+              selectedDate != null &&
+              selectedDate!.year == year &&
+              selectedDate!.month == m &&
+              selectedDate!.day == day;
 
-          return GestureDetector(
-            onTap: () => onDateSelected(date),
-            child: _DayCell(
-              day: day,
-              isSelected: isSelected
-            ),
-          );
-      }
+              return GestureDetector(
+                 onTap: () => onDateSelected(date),
+                child: _DayCell(
+                  day: day,
+                  isSelected: isSelected
+                ),
+              );
+            }
+          ),
+          SizedBox(height: 20)
+        ],
+      )   
     );
   }
 }
@@ -219,6 +251,7 @@ class _RecordByDate extends StatelessWidget{
 
   @override
     Widget build(BuildContext context) {
+
       if (selectedDate == null) {
       return const Text('날짜를 선택해주세요');
     }
@@ -243,7 +276,7 @@ class _DayCell extends StatelessWidget{
         width: 32,
         height: 32,
         decoration: BoxDecoration(
-          color: isSelected ? Appcolor.activeNav : null,
+          color: isSelected ? Appcolor.primary : null,
           shape: BoxShape.circle
         ),
         alignment: Alignment.center,
@@ -259,3 +292,46 @@ class _DayCell extends StatelessWidget{
   }
 }
 
+class _RecordList extends StatelessWidget{
+  
+  const _RecordList({super.key});
+    
+  @override
+  Widget build(BuildContext context) {
+    final items = [
+      ('유튜브 프리미엄', '3일 후 결제', '12000₩'),
+      ('어도비', '1일 후 결제', '18000₩'),
+      ('버블', '13일 후 결제', '4000₩'),
+      ('넷플릭스', '21일 후 결제', '6000₩'),
+      ('왓챠', '9일 후 결제', '13000₩'),
+    ];
+
+    return CardContainer(
+      child: ListView.builder(
+        itemCount: items.length,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index){
+          final item = items[index];
+
+          return Padding(
+            padding: EdgeInsetsGeometry.symmetric(vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(item.$1, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Appcolor.darkGrey)),
+                    Text(item.$2, style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Appcolor.middleGrey)),
+                  ],
+                ),
+                Text(item.$3, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Appcolor.darkGrey)),
+              ],
+            ),
+          );
+        }
+      )
+    );
+  }
+}
